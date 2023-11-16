@@ -5,8 +5,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.textLogo}>[Coachly Logo]</Text>
-      <Button title='Start Lesson' onPress={() => navigation.navigate('Lesson')} />
-      <Button title='Craft Speech' onPress={() => navigation.navigate('Speech')} />
+      <Button title='Voice Coach' onPress={() => navigation.navigate('Voice Coach')} />
       <Button title='View Progress' onPress={() => navigation.navigate('Progress')} />
       <StatusBar style="auto" />
     </View>

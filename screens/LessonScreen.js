@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native';
 import { Audio } from 'expo-av';
 
 export default function LessonScreen() {
-  const [currentLesson, setCurrentLesson] = useState(0);
   const [recording, setRecording] = React.useState();
-  const [sound, setSound] = React.useState();
   const [uri, setUri] = React.useState();
 
   async function startRecording() {
@@ -78,12 +76,23 @@ export default function LessonScreen() {
 
   return (
     <View style={styles.container}>
+      {!!recording && <TouchableOpacity onPress={startRecording}>
+        <Image
+          source={require('../assets/stop-icon.jpeg')}
+          style={{ width: 120, height: 120 }} // Adjust the size as needed
+        />
+      </TouchableOpacity>}
+      {!recording && <TouchableOpacity onPress={startRecording}>
+        <Image
+          source={require('../assets/mic-icon.png')}
+          style={{ width: 120, height: 120 }} // Adjust the size as needed
+        />
+      </TouchableOpacity>}
       <Button
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
       />
-      <Button title='Play' onPress={sendFile} />
-      <Text>{LESSONS[currentLesson]}</Text>
+      <Text>{recording ? "recording" : "stopped"}</Text>
       <StatusBar style="auto" />
     </View>
   );
